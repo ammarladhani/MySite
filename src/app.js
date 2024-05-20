@@ -11,9 +11,12 @@ function type() {
     if (charIndex < textArray[textArrayIndex].length) {
         typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
         charIndex++;
-        setTimeout(type, typingDelay);
+        //generate a number between -40 and 40
+        let randomNumber = Math.floor(Math.random() * 80) - 40;
+        setTimeout(type, typingDelay + randomNumber);
     } else {
-        setTimeout(erase, newTextDelay);
+        let randomNumber = Math.floor(Math.random() * 800) - 400;
+        setTimeout(erase, newTextDelay+randomNumber);
     }
 }
 
@@ -21,11 +24,13 @@ function erase() {
     if (charIndex > 0) {
         typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
         charIndex--;
-        setTimeout(erase, erasingDelay);
+        let randomNumber = Math.floor(Math.random() * 40) - 20;
+        setTimeout(erase, erasingDelay + randomNumber);
     } else {
         textArrayIndex++;
         if (textArrayIndex >= textArray.length) textArrayIndex = 0;
-        setTimeout(type, typingDelay + 1100);
+        let randomNumber = Math.floor(Math.random() * 800) - 400;
+        setTimeout(type, typingDelay + 1100 + randomNumber);
     }
 }
 
