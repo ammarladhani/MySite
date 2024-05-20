@@ -19,7 +19,7 @@ function type() {
     } else {
         cursorSpan.classList.remove("typing");
         let randomNumber = Math.floor(Math.random() * 800) - 400;
-        setTimeout(erase, newTextDelay+randomNumber);
+        setTimeout(erase, newTextDelay + randomNumber);
     }
 }
 
@@ -32,7 +32,8 @@ function erase() {
         setTimeout(erase, erasingDelay + randomNumber);
     } else {
         cursorSpan.classList.remove("typing");
-        textArrayIndex++;
+        //set textArrayIndex to a random number
+        textArrayIndex = Math.floor(Math.random() * textArray.length);
         if (textArrayIndex >= textArray.length) textArrayIndex = 0;
         let randomNumber = Math.floor(Math.random() * 440) - 220;
         setTimeout(type, typingDelay + 880 + randomNumber);
