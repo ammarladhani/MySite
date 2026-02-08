@@ -1,63 +1,184 @@
-@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Pacifico&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
-    font-family: 'Josefin Sans', sans-serif;
-    background-color: #F8F4E1;
+    font-family: 'Nunito', sans-serif;
+    background: radial-gradient(circle at top, #ffe0ea, #ffc1d6 40%, #ff9fbf 100%);
+    color: #6b1b39;
+    min-height: 100vh;
 }
-.container {
+
+.page {
+    min-height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
+    justify-content: center;
+    padding: 2rem 1rem;
 }
 
-.container p {
-    font-size: 64px;
-    font-weight: bold;
-    color: #543310;
-    letter-spacing: 0.1rem;
-    text-align: center;
+.captcha-card {
+    background: #fff8fb;
+    border: 2px solid #f5d4df;
+    box-shadow: 0 16px 30px rgba(107, 27, 57, 0.2);
+    border-radius: 24px;
+    padding: 2rem;
+    max-width: 520px;
+    width: 100%;
+    position: relative;
     overflow: hidden;
-    padding: 0.5rem;
 }
 
-.typed-text {
-    color: #AF8F6F;
-    font-weight: normal;
+.captcha-card::before {
+    content: "";
+    position: absolute;
+    inset: -30% -30% auto;
+    height: 200px;
+    background: linear-gradient(135deg, rgba(255, 185, 205, 0.8), rgba(255, 138, 177, 0.2));
+    border-radius: 50%;
+    z-index: 0;
 }
 
-.cursor {
-    background: linear-gradient(to bottom, #AF8F6F 80%, transparent 20%);
+.captcha-header {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 1.5rem;
+}
+
+.heart {
+    font-size: 2.5rem;
+    background: #ff6b9a;
+    color: white;
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 10px 20px rgba(255, 107, 154, 0.35);
+}
+
+.captcha-title {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.6rem;
+    color: #b61d4a;
+}
+
+.captcha-subtitle {
+    font-size: 1rem;
+    color: #8a2d50;
+}
+
+.captcha-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+    position: relative;
+    z-index: 1;
+}
+
+.captcha-tile {
+    border: 2px solid #f2c6d7;
+    border-radius: 14px;
+    overflow: hidden;
+    padding: 0;
+    background: #fff;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.captcha-tile img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.captcha-tile:hover,
+.captcha-tile:focus {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 18px rgba(182, 29, 74, 0.2);
+    outline: none;
+}
+
+.captcha-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    position: relative;
+    z-index: 1;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.checkbox-area {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #f9edf2;
+    border: 1px solid #f2c6d7;
+    padding: 0.6rem 0.8rem;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.checkbox-area input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.checkbox-custom {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #c84a73;
+    border-radius: 4px;
+    background: #fff;
     display: inline-block;
-    width: 3px;
-    margin-left: 0.1rem;
-    animation: blink 1s infinite;
+    position: relative;
 }
 
-.cursor.typing {
-    animation: none;
+.checkbox-area input:checked + .checkbox-custom::after {
+    content: "❤";
+    position: absolute;
+    left: 2px;
+    top: -1px;
+    font-size: 14px;
+    color: #c84a73;
 }
 
-@keyframes blink {
-    0% {
-        background: linear-gradient(to bottom, #AF8F6F 80%, transparent 20%);
-    }
-    49% {
-        background: linear-gradient(to bottom, #AF8F6F 80%, transparent 20%);
-    }
-    50% {
-        background: linear-gradient(to bottom, transparent 80%, transparent 20%);
-    }
-    99% {
-        background: linear-gradient(to bottom, transparent 80%, transparent 20%);
-    }
-    100% {
-        background: linear-gradient(to bottom, #AF8F6F 80%, transparent 20%);
+.captcha-brand {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #b61d4a;
+    background: #ffe8f1;
+    padding: 0.35rem 0.8rem;
+    border-radius: 999px;
+    border: 1px dashed #f2c6d7;
+}
+
+@media (max-width: 640px) {
+    .captcha-card {
+        padding: 1.5rem;
     }
 
+    .captcha-title {
+        font-size: 1.4rem;
+    }
+
+    .captcha-grid {
+        gap: 0.5rem;
+    }
+
+    .captcha-footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }

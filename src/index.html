@@ -3,15 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ammar Ladhani</title>
+    <title>Valentine CAPTCHA</title>
     <link rel="stylesheet" href="styles.css">
-
-
 </head>
 <body>
-    <div class = "container">
-        <p>I'm Ammar Ladhani, <span class="typed-text"></span><span class="cursor">&nbsp;</span> </p>
-    </div>
-    <script src="app.js"></script>
+    <main class="page">
+        <section class="captcha-card">
+            <header class="captcha-header">
+                <div class="heart">❤</div>
+                <div>
+                    <p class="captcha-title">I am not a robot</p>
+                    <p class="captcha-subtitle">Select all pics of ur bf.</p>
+                </div>
+            </header>
+
+            <div class="captcha-grid" aria-label="Select all pics of ur bf">
+                <button class="captcha-tile" type="button" aria-label="BF pic 1">
+                    <img src="https://placehold.co/200x200/f8b7c9/7a2344?text=BF" alt="BF placeholder">
+                </button>
+                <button class="captcha-tile" type="button" aria-label="BF pic 2">
+                    <img src="https://placehold.co/200x200/f9a1b7/7a2344?text=BF" alt="BF placeholder">
+                </button>
+                <button class="captcha-tile" type="button" aria-label="BF pic 3">
+                    <img src="https://placehold.co/200x200/f48fb1/7a2344?text=BF" alt="BF placeholder">
+                </button>
+                <button class="captcha-tile" type="button" aria-label="BF pic 4">
+                    <img src="https://placehold.co/200x200/f06292/7a2344?text=BF" alt="BF placeholder">
+                </button>
+                <button class="captcha-tile" type="button" aria-label="BF pic 5">
+                    <img src="https://placehold.co/200x200/ec407a/7a2344?text=BF" alt="BF placeholder">
+                </button>
+                <button class="captcha-tile" type="button" aria-label="BF pic 6">
+                    <img src="https://placehold.co/200x200/f8b7c9/7a2344?text=BF" alt="BF placeholder">
+                </button>
+                <button class="captcha-tile" type="button" aria-label="BF pic 7">
+                    <img src="https://placehold.co/200x200/f9a1b7/7a2344?text=BF" alt="BF placeholder">
+                </button>
+                <button class="captcha-tile" type="button" aria-label="BF pic 8">
+                    <img src="https://placehold.co/200x200/f48fb1/7a2344?text=BF" alt="BF placeholder">
+                </button>
+                <button class="captcha-tile" type="button" aria-label="BF pic 9">
+                    <img src="https://placehold.co/200x200/f06292/7a2344?text=BF" alt="BF placeholder">
+                </button>
+            </div>
+
+            <div class="captcha-footer">
+                <label class="checkbox-area">
+                    <input type="checkbox" aria-label="I am not a robot">
+                    <span class="checkbox-custom"></span>
+                    <span class="checkbox-label">I am not a robot</span>
+                </label>
+                <div class="captcha-brand">Valentine™</div>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
