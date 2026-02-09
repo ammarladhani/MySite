@@ -120,7 +120,7 @@ const repelNoButtonFromMouse = () => {
 
     const safeDistance = distance || 1;
     const intensity = (repelRadius - distance) / repelRadius;
-    const shift = 36 * intensity;
+    const shift = Math.max(36 * intensity, 18);
 
     const nextX = clamp(
         noButton.offsetLeft + (deltaX / safeDistance) * shift,
@@ -132,6 +132,38 @@ const repelNoButtonFromMouse = () => {
         0,
         maxY
     );
+
+    const edgePadding = 8;
+    const isNearEdge =
+        noButton.offsetLeft <= edgePadding ||
+        noButton.offsetTop <= edgePadding ||
+        noButton.offsetLeft >= maxX - edgePadding ||
+        noButton.offsetTop >= maxY - edgePadding;
+
+    if (isNearEdge) {
+        let nextPos = null;
+        for (let attempts = 0; attempts < 20; attempts += 1) {
+            const candidate = getSafeRandomPosition(noButton, lastMousePosition);
+            const candidateCenter = {
+                x: candidate.x + buttonWidth / 2,
+                y: candidate.y + buttonHeight / 2
+            };
+            const candidateDistance = Math.hypot(
+                candidateCenter.x - lastMousePosition.x,
+                candidateCenter.y - lastMousePosition.y
+            );
+            if (candidateDistance > repelRadius) {
+                nextPos = candidate;
+                break;
+            }
+            nextPos = candidate;
+        }
+
+        if (nextPos) {
+            setButtonPosition(noButton, nextPos.x, nextPos.y);
+            return;
+        }
+    }
 
     setButtonPosition(noButton, nextX, nextY);
 };
