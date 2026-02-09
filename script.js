@@ -6,6 +6,7 @@ const messageText = document.querySelector('[data-message]');
 const actionsArea = document.querySelector('[data-actions]');
 const yesButton = document.querySelector('[data-yes]');
 const noButton = document.querySelector('[data-no]');
+const noShield = document.querySelector('[data-no-shield]');
 
 const steps = [
     'Will you be my valentine?',
@@ -27,6 +28,13 @@ const positionState = {
 const setButtonPosition = (button, x, y) => {
     button.style.left = `${x}px`;
     button.style.top = `${y}px`;
+};
+
+const setShieldPosition = (x, y, width, height) => {
+    noShield.style.left = `${x}px`;
+    noShield.style.top = `${y}px`;
+    noShield.style.width = `${width}px`;
+    noShield.style.height = `${height}px`;
 };
 
 const getSafeRandomPosition = (button, mousePosition) => {
@@ -101,6 +109,21 @@ const updateQuestion = () => {
     questionText.textContent = steps[currentStep] || steps[steps.length - 1];
 };
 
+const updateNoShield = () => {
+    if (currentStep === 2) {
+        noShield.classList.remove('is-hidden');
+        const padding = 6;
+        setShieldPosition(
+            positionState.no.x - padding,
+            positionState.no.y - padding,
+            noButton.offsetWidth + padding * 2,
+            noButton.offsetHeight + padding * 2
+        );
+    } else {
+        noShield.classList.add('is-hidden');
+    }
+};
+
 const showFinalMessage = () => {
     questionText.classList.add('is-hidden');
     messageText.classList.remove('is-hidden');
@@ -133,12 +156,17 @@ const resetButtons = () => {
     yesButton.textContent = 'Yes';
     noButton.textContent = 'No';
     placeDefaultButtons();
+    updateNoShield();
 };
 
 const handleNoHover = () => {
-    if (currentStep === 0 || currentStep === 2) {
+    if (currentStep === 0) {
         const nextPos = getSafeRandomPosition(noButton, lastMousePosition);
         setButtonPosition(noButton, nextPos.x, nextPos.y);
+        return;
+    }
+
+    if (currentStep === 2) {
         return;
     }
 
@@ -189,6 +217,7 @@ actionsArea.addEventListener('mouseleave', () => {
 window.addEventListener('resize', () => {
     if (!valentineSection.classList.contains('is-hidden')) {
         placeDefaultButtons();
+        updateNoShield();
     }
 });
 
