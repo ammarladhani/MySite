@@ -251,42 +251,6 @@ body {
     display: none;
 }
 
-.checkbox-area {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: #f9edf2;
-    border: 1px solid #f2c6d7;
-    padding: 0.6rem 0.8rem;
-    border-radius: 12px;
-    font-weight: 600;
-}
-
-.checkbox-area input {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-}
-
-.checkbox-custom {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #c84a73;
-    border-radius: 4px;
-    background: #fff;
-    display: inline-block;
-    position: relative;
-}
-
-.checkbox-area input:checked + .checkbox-custom::after {
-    content: "❤";
-    position: absolute;
-    left: 2px;
-    top: -1px;
-    font-size: 14px;
-    color: #c84a73;
-}
-
 .captcha-brand {
     font-size: 0.9rem;
     font-weight: 700;
