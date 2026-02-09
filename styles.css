@@ -287,16 +287,6 @@ body {
     color: #c84a73;
 }
 
-.captcha-brand {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #b61d4a;
-    background: #ffe8f1;
-    padding: 0.35rem 0.8rem;
-    border-radius: 999px;
-    border: 1px dashed #f2c6d7;
-}
-
 @media (max-width: 640px) {
     .captcha-card {
         padding: 1.5rem;
