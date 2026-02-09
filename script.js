@@ -1,6 +1,7 @@
 const captchaSection = document.querySelector('[data-section="captcha"]');
 const valentineSection = document.querySelector('[data-section="valentine"]');
 const verifyButton = document.querySelector('.verify-button');
+const captchaTiles = document.querySelectorAll('.captcha-tile');
 const questionText = document.querySelector('[data-question]');
 const messageText = document.querySelector('[data-message]');
 const actionsArea = document.querySelector('[data-actions]');
@@ -280,3 +281,11 @@ window.addEventListener('resize', () => {
 });
 
 updateQuestion();
+
+captchaTiles.forEach((tile) => {
+    tile.setAttribute('aria-pressed', 'false');
+    tile.addEventListener('click', () => {
+        const isSelected = tile.classList.toggle('is-selected');
+        tile.setAttribute('aria-pressed', String(isSelected));
+    });
+});
