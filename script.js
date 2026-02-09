@@ -37,6 +37,8 @@ const setShieldPosition = (x, y, width, height) => {
     noShield.style.height = `${height}px`;
 };
 
+const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
 const getSafeRandomPosition = (button, mousePosition) => {
     const areaWidth = actionsArea.clientWidth;
     const areaHeight = actionsArea.clientHeight;
@@ -88,6 +90,50 @@ const isMouseOverButtonPosition = (button, position) => {
         lastMousePosition.y >= position.y &&
         lastMousePosition.y <= position.y + buttonHeight
     );
+};
+
+const repelNoButtonFromMouse = () => {
+    if (!lastMousePosition) {
+        return;
+    }
+
+    const areaWidth = actionsArea.clientWidth;
+    const areaHeight = actionsArea.clientHeight;
+    const buttonWidth = noButton.offsetWidth;
+    const buttonHeight = noButton.offsetHeight;
+    const maxX = Math.max(0, areaWidth - buttonWidth);
+    const maxY = Math.max(0, areaHeight - buttonHeight);
+
+    const buttonCenter = {
+        x: noButton.offsetLeft + buttonWidth / 2,
+        y: noButton.offsetTop + buttonHeight / 2
+    };
+
+    const deltaX = buttonCenter.x - lastMousePosition.x;
+    const deltaY = buttonCenter.y - lastMousePosition.y;
+    const distance = Math.hypot(deltaX, deltaY);
+    const repelRadius = 120;
+
+    if (distance > repelRadius) {
+        return;
+    }
+
+    const safeDistance = distance || 1;
+    const intensity = (repelRadius - distance) / repelRadius;
+    const shift = 36 * intensity;
+
+    const nextX = clamp(
+        noButton.offsetLeft + (deltaX / safeDistance) * shift,
+        0,
+        maxX
+    );
+    const nextY = clamp(
+        noButton.offsetTop + (deltaY / safeDistance) * shift,
+        0,
+        maxY
+    );
+
+    setButtonPosition(noButton, nextX, nextY);
 };
 
 const placeDefaultButtons = () => {
@@ -170,7 +216,7 @@ const handleNoHover = () => {
         return;
     }
 
-    if (currentStep === 1 || currentStep === 3) {
+    if (currentStep === 1) {
         swapButtonPositions();
         return;
     }
@@ -208,6 +254,10 @@ actionsArea.addEventListener('mousemove', (event) => {
         x: event.clientX - bounds.left,
         y: event.clientY - bounds.top
     };
+
+    if (currentStep === 3) {
+        repelNoButtonFromMouse();
+    }
 });
 
 actionsArea.addEventListener('mouseleave', () => {
