@@ -37,7 +37,15 @@ const setShieldPosition = (x, y, width, height) => {
     noShield.style.height = `${height}px`;
 };
 
-const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+const wrapPosition = (value, min, max) => {
+    if (value < min) {
+        return max;
+    }
+    if (value > max) {
+        return min;
+    }
+    return value;
+};
 
 const getSafeRandomPosition = (button, mousePosition) => {
     const areaWidth = actionsArea.clientWidth;
@@ -122,48 +130,11 @@ const repelNoButtonFromMouse = () => {
     const intensity = (repelRadius - distance) / repelRadius;
     const shift = Math.max(36 * intensity, 18);
 
-    const nextX = clamp(
-        noButton.offsetLeft + (deltaX / safeDistance) * shift,
-        0,
-        maxX
-    );
-    const nextY = clamp(
-        noButton.offsetTop + (deltaY / safeDistance) * shift,
-        0,
-        maxY
-    );
+    const nextXRaw = noButton.offsetLeft + (deltaX / safeDistance) * shift;
+    const nextYRaw = noButton.offsetTop + (deltaY / safeDistance) * shift;
 
-    const edgePadding = 8;
-    const isNearEdge =
-        noButton.offsetLeft <= edgePadding ||
-        noButton.offsetTop <= edgePadding ||
-        noButton.offsetLeft >= maxX - edgePadding ||
-        noButton.offsetTop >= maxY - edgePadding;
-
-    if (isNearEdge) {
-        let nextPos = null;
-        for (let attempts = 0; attempts < 20; attempts += 1) {
-            const candidate = getSafeRandomPosition(noButton, lastMousePosition);
-            const candidateCenter = {
-                x: candidate.x + buttonWidth / 2,
-                y: candidate.y + buttonHeight / 2
-            };
-            const candidateDistance = Math.hypot(
-                candidateCenter.x - lastMousePosition.x,
-                candidateCenter.y - lastMousePosition.y
-            );
-            if (candidateDistance > repelRadius) {
-                nextPos = candidate;
-                break;
-            }
-            nextPos = candidate;
-        }
-
-        if (nextPos) {
-            setButtonPosition(noButton, nextPos.x, nextPos.y);
-            return;
-        }
-    }
+    const nextX = wrapPosition(nextXRaw, 0, maxX);
+    const nextY = wrapPosition(nextYRaw, 0, maxY);
 
     setButtonPosition(noButton, nextX, nextY);
 };
