@@ -118,6 +118,139 @@ body {
     gap: 0.75rem;
 }
 
+.verify-button {
+    border: none;
+    background: #ff6b9a;
+    color: white;
+    font-weight: 700;
+    padding: 0.55rem 1.4rem;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 10px 18px rgba(255, 107, 154, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.verify-button:hover,
+.verify-button:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 22px rgba(255, 107, 154, 0.4);
+    outline: none;
+}
+
+.valentine-card {
+    background: #fff8fb;
+    border: 2px solid #f5d4df;
+    box-shadow: 0 16px 30px rgba(107, 27, 57, 0.2);
+    border-radius: 24px;
+    padding: 2rem;
+    max-width: 520px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.valentine-card::before {
+    content: "";
+    position: absolute;
+    inset: -40% -40% auto;
+    height: 220px;
+    background: linear-gradient(135deg, rgba(255, 185, 205, 0.7), rgba(255, 138, 177, 0.15));
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.valentine-header {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 1.5rem;
+}
+
+.valentine-badge {
+    font-size: 2rem;
+    background: #ff6b9a;
+    color: white;
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 10px 20px rgba(255, 107, 154, 0.35);
+}
+
+.valentine-title {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.5rem;
+    color: #b61d4a;
+}
+
+.valentine-subtitle {
+    font-size: 1rem;
+    color: #8a2d50;
+}
+
+.valentine-body {
+    position: relative;
+    z-index: 1;
+}
+
+.valentine-question {
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 0.75rem;
+}
+
+.valentine-message {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #b61d4a;
+    margin-bottom: 1.5rem;
+}
+
+.valentine-actions {
+    position: relative;
+    height: 140px;
+    border-radius: 18px;
+    background: rgba(255, 230, 240, 0.6);
+    border: 2px dashed #f2c6d7;
+    overflow: hidden;
+}
+
+.valentine-button {
+    position: absolute;
+    border: none;
+    padding: 0.75rem 1.8rem;
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+}
+
+.valentine-button.yes {
+    background: #ff6b9a;
+    color: white;
+    box-shadow: 0 10px 18px rgba(255, 107, 154, 0.35);
+}
+
+.valentine-button.no {
+    background: #fff;
+    color: #b61d4a;
+    border: 2px solid #f2c6d7;
+}
+
+.valentine-button:focus {
+    outline: none;
+    transform: translateY(-2px);
+}
+
+.is-hidden {
+    display: none;
+}
+
 .checkbox-area {
     display: flex;
     align-items: center;
@@ -180,5 +313,13 @@ body {
     .captcha-footer {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .valentine-card {
+        padding: 1.5rem;
+    }
+
+    .valentine-question {
+        font-size: 1.2rem;
     }
 }

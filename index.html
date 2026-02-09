@@ -8,7 +8,7 @@
 </head>
 <body>
     <main class="page">
-        <section class="captcha-card">
+        <section class="captcha-card" data-section="captcha">
             <header class="captcha-header">
                 <div class="heart">❤</div>
                 <div>
@@ -53,9 +53,33 @@
                     <span class="checkbox-custom"></span>
                     <span class="checkbox-label">I am not a robot</span>
                 </label>
+                <button class="verify-button" type="button">Verify</button>
                 <div class="captcha-brand">Valentine™</div>
             </div>
         </section>
+
+        <section class="valentine-card is-hidden" data-section="valentine">
+            <header class="valentine-header">
+                <div class="valentine-badge">❤</div>
+                <div>
+                    <p class="valentine-title">Valentine Check</p>
+                    <p class="valentine-subtitle">Final confirmation required.</p>
+                </div>
+            </header>
+
+            <div class="valentine-body">
+                <p class="valentine-question" data-question>Will you be my valentine?</p>
+                <p class="valentine-message is-hidden" data-message>
+                    Let’s do a video call dinner on Feb 14 at 7 PM 💕
+                </p>
+                <div class="valentine-actions" data-actions>
+                    <button class="valentine-button yes" type="button" data-yes>Yes</button>
+                    <button class="valentine-button no" type="button" data-no>No</button>
+                </div>
+            </div>
+        </section>
     </main>
+
+    <script src="script.js"></script>
 </body>
 </html>
