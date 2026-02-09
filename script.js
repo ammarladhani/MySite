@@ -204,6 +204,8 @@ const resetButtons = () => {
     swapState = false;
     yesButton.textContent = 'Yes';
     noButton.textContent = 'No';
+    noButton.classList.remove('is-loading');
+    noButton.removeAttribute('aria-busy');
     placeDefaultButtons();
     updateNoShield();
 };
@@ -249,6 +251,12 @@ verifyButton.addEventListener('click', () => {
 });
 
 yesButton.addEventListener('click', advanceStep);
+noButton.addEventListener('click', () => {
+    if (currentStep === steps.length - 1) {
+        noButton.classList.add('is-loading');
+        noButton.setAttribute('aria-busy', 'true');
+    }
+});
 noButton.addEventListener('mouseenter', handleNoHover);
 
 actionsArea.addEventListener('mousemove', (event) => {
