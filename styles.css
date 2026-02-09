@@ -228,6 +228,7 @@ body {
     font-weight: 700;
     cursor: pointer;
     transition: transform 0.15s ease;
+    z-index: 1;
 }
 
 .valentine-button.yes {
@@ -245,6 +246,16 @@ body {
 .valentine-button:focus {
     outline: none;
     transform: translateY(-2px);
+}
+
+.no-shield {
+    position: absolute;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.25);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(1px);
+    z-index: 2;
+    pointer-events: auto;
 }
 
 .is-hidden {
