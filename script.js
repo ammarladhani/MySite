@@ -227,8 +227,7 @@ const handleNoHover = () => {
     }
 
     if (currentStep === 4) {
-        noButton.classList.add('is-loading');
-        noButton.setAttribute('aria-busy', 'true');
+        return;
     }
 };
 
