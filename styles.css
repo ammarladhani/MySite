@@ -84,6 +84,7 @@ body {
 }
 
 .captcha-tile {
+    position: relative;
     border: 2px solid #f2c6d7;
     border-radius: 14px;
     overflow: hidden;
@@ -91,6 +92,29 @@ body {
     background: #fff;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.captcha-tile.is-selected {
+    border-color: #ff6b9a;
+    box-shadow: 0 0 0 3px rgba(255, 107, 154, 0.35);
+    transform: translateY(-2px) scale(1.01);
+}
+
+.captcha-tile.is-selected::after {
+    content: "✓";
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    color: #b61d4a;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 6px 12px rgba(182, 29, 74, 0.25);
+    pointer-events: none;
 }
 
 .captcha-tile img {
