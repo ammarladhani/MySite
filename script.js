@@ -17,6 +17,7 @@ const steps = [
 
 let currentStep = 0;
 let swapState = false;
+let lastMousePosition = null;
 
 const positionState = {
     yes: { x: 0, y: 0 },
@@ -28,7 +29,7 @@ const setButtonPosition = (button, x, y) => {
     button.style.top = `${y}px`;
 };
 
-const getSafeRandomPosition = (button) => {
+const getSafeRandomPosition = (button, mousePosition) => {
     const areaWidth = actionsArea.clientWidth;
     const areaHeight = actionsArea.clientHeight;
     const buttonWidth = button.offsetWidth;
@@ -37,10 +38,48 @@ const getSafeRandomPosition = (button) => {
     const maxX = Math.max(0, areaWidth - buttonWidth);
     const maxY = Math.max(0, areaHeight - buttonHeight);
 
-    return {
+    const isMouseOverPosition = (position) => {
+        if (!mousePosition) {
+            return false;
+        }
+        return (
+            mousePosition.x >= position.x &&
+            mousePosition.x <= position.x + buttonWidth &&
+            mousePosition.y >= position.y &&
+            mousePosition.y <= position.y + buttonHeight
+        );
+    };
+
+    let candidate = {
         x: Math.floor(Math.random() * maxX),
         y: Math.floor(Math.random() * maxY)
     };
+
+    let attempts = 0;
+    while (attempts < 20 && isMouseOverPosition(candidate)) {
+        candidate = {
+            x: Math.floor(Math.random() * maxX),
+            y: Math.floor(Math.random() * maxY)
+        };
+        attempts += 1;
+    }
+
+    return candidate;
+};
+
+const isMouseOverButtonPosition = (button, position) => {
+    if (!lastMousePosition) {
+        return false;
+    }
+    const buttonWidth = button.offsetWidth;
+    const buttonHeight = button.offsetHeight;
+
+    return (
+        lastMousePosition.x >= position.x &&
+        lastMousePosition.x <= position.x + buttonWidth &&
+        lastMousePosition.y >= position.y &&
+        lastMousePosition.y <= position.y + buttonHeight
+    );
 };
 
 const placeDefaultButtons = () => {
@@ -72,10 +111,20 @@ const swapButtonPositions = () => {
     swapState = !swapState;
     if (swapState) {
         setButtonPosition(yesButton, positionState.no.x, positionState.no.y);
-        setButtonPosition(noButton, positionState.yes.x, positionState.yes.y);
+        if (isMouseOverButtonPosition(noButton, positionState.yes)) {
+            const nextPos = getSafeRandomPosition(noButton, lastMousePosition);
+            setButtonPosition(noButton, nextPos.x, nextPos.y);
+        } else {
+            setButtonPosition(noButton, positionState.yes.x, positionState.yes.y);
+        }
     } else {
         setButtonPosition(yesButton, positionState.yes.x, positionState.yes.y);
-        setButtonPosition(noButton, positionState.no.x, positionState.no.y);
+        if (isMouseOverButtonPosition(noButton, positionState.no)) {
+            const nextPos = getSafeRandomPosition(noButton, lastMousePosition);
+            setButtonPosition(noButton, nextPos.x, nextPos.y);
+        } else {
+            setButtonPosition(noButton, positionState.no.x, positionState.no.y);
+        }
     }
 };
 
@@ -88,7 +137,7 @@ const resetButtons = () => {
 
 const handleNoHover = () => {
     if (currentStep === 0 || currentStep === 2) {
-        const nextPos = getSafeRandomPosition(noButton);
+        const nextPos = getSafeRandomPosition(noButton, lastMousePosition);
         setButtonPosition(noButton, nextPos.x, nextPos.y);
         return;
     }
@@ -124,6 +173,18 @@ verifyButton.addEventListener('click', () => {
 
 yesButton.addEventListener('click', advanceStep);
 noButton.addEventListener('mouseenter', handleNoHover);
+
+actionsArea.addEventListener('mousemove', (event) => {
+    const bounds = actionsArea.getBoundingClientRect();
+    lastMousePosition = {
+        x: event.clientX - bounds.left,
+        y: event.clientY - bounds.top
+    };
+});
+
+actionsArea.addEventListener('mouseleave', () => {
+    lastMousePosition = null;
+});
 
 window.addEventListener('resize', () => {
     if (!valentineSection.classList.contains('is-hidden')) {
