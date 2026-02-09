@@ -227,10 +227,8 @@ const handleNoHover = () => {
     }
 
     if (currentStep === 4) {
-        const currentYes = yesButton.textContent;
-        yesButton.textContent = noButton.textContent;
-        noButton.textContent = currentYes;
-        swapButtonPositions();
+        noButton.classList.add('is-loading');
+        noButton.setAttribute('aria-busy', 'true');
     }
 };
 
