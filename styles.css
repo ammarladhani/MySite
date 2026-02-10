@@ -166,8 +166,8 @@ body {
     border: 2px solid #f5d4df;
     box-shadow: 0 16px 30px rgba(107, 27, 57, 0.2);
     border-radius: 24px;
-    padding: 2rem;
-    max-width: 520px;
+    padding: 2.5rem;
+    max-width: 620px;
     width: 100%;
     position: relative;
     overflow: hidden;
@@ -221,7 +221,7 @@ body {
 }
 
 .valentine-question {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 700;
     text-align: center;
     margin-bottom: 0.75rem;
@@ -331,7 +331,7 @@ body {
     }
 
     .valentine-card {
-        padding: 1.5rem;
+        padding: 1.75rem;
     }
 
     .valentine-question {
