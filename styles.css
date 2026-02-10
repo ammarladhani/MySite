@@ -166,11 +166,11 @@ body {
     border: 2px solid #f5d4df;
     box-shadow: 0 16px 30px rgba(107, 27, 57, 0.2);
     border-radius: 24px;
-    padding: 2.5rem;
+    padding: 2rem;
+    max-width: 520px;
     width: 100%;
     position: relative;
     overflow: hidden;
-    min-height: 1000px;
 }
 
 .valentine-card::before {
@@ -221,7 +221,7 @@ body {
 }
 
 .valentine-question {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 700;
     text-align: center;
     margin-bottom: 0.75rem;
@@ -237,7 +237,7 @@ body {
 
 .valentine-actions {
     position: relative;
-    height: 782px;
+    height: 140px;
     border-radius: 18px;
     background: rgba(255, 230, 240, 0.6);
     border: 2px dashed #f2c6d7;
@@ -247,7 +247,7 @@ body {
 .valentine-button {
     position: absolute;
     border: none;
-    padding: 3rem 8rem;
+    padding: 0.75rem 1.8rem;
     border-radius: 999px;
     font-weight: 700;
     cursor: pointer;
@@ -331,7 +331,7 @@ body {
     }
 
     .valentine-card {
-        padding: 1.75rem;
+        padding: 1.5rem;
     }
 
     .valentine-question {
