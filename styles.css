@@ -171,6 +171,7 @@ body {
     width: 100%;
     position: relative;
     overflow: hidden;
+    min-height: 440px;
 }
 
 .valentine-card::before {
@@ -237,7 +238,7 @@ body {
 
 .valentine-actions {
     position: relative;
-    height: 140px;
+    height: 190px;
     border-radius: 18px;
     background: rgba(255, 230, 240, 0.6);
     border: 2px dashed #f2c6d7;
