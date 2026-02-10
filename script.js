@@ -2,6 +2,7 @@ const captchaSection = document.querySelector('[data-section="captcha"]');
 const valentineSection = document.querySelector('[data-section="valentine"]');
 const verifyButton = document.querySelector('.verify-button');
 const captchaTiles = document.querySelectorAll('.captcha-tile');
+const captchaError = document.querySelector('[data-captcha-error]');
 const questionText = document.querySelector('[data-question]');
 const messageText = document.querySelector('[data-message]');
 const actionsArea = document.querySelector('[data-actions]');
@@ -243,6 +244,14 @@ const advanceStep = () => {
 };
 
 verifyButton.addEventListener('click', () => {
+    const allSelected = document.querySelectorAll('.captcha-tile.is-selected').length === captchaTiles.length;
+
+    if (!allSelected) {
+        captchaError.classList.remove('is-hidden');
+        return;
+    }
+
+    captchaError.classList.add('is-hidden');
     captchaSection.classList.add('is-hidden');
     valentineSection.classList.remove('is-hidden');
     resetButtons();
@@ -287,5 +296,14 @@ captchaTiles.forEach((tile) => {
     tile.addEventListener('click', () => {
         const isSelected = tile.classList.toggle('is-selected');
         tile.setAttribute('aria-pressed', String(isSelected));
+
+        if (captchaError && captchaError.classList.contains('is-hidden')) {
+            return;
+        }
+
+        const allSelected = document.querySelectorAll('.captcha-tile.is-selected').length === captchaTiles.length;
+        if (allSelected) {
+            captchaError.classList.add('is-hidden');
+        }
     });
 });
