@@ -76,9 +76,12 @@ body {
 }
 
 .captcha-grid {
+    /* make each tile a fixed 200x200 square and center the grid */
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(3, 200px);
+    grid-auto-rows: 200px;
     gap: 0.75rem;
+    justify-content: center;
     position: relative;
     z-index: 1;
 }
@@ -92,6 +95,9 @@ body {
     background: #fff;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    /* ensure the button fills the grid cell */
+    width: 100%;
+    height: 100%;
 }
 
 .captcha-tile.is-selected {
@@ -323,6 +329,9 @@ body {
 
     .captcha-grid {
         gap: 0.5rem;
+        /* On small screens use fluid columns and slightly smaller squares */
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-auto-rows: 120px;
     }
 
     .captcha-footer {
