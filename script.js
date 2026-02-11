@@ -1,5 +1,7 @@
+const gateSection = document.querySelector('[data-section="gate"]');
 const captchaSection = document.querySelector('[data-section="captcha"]');
 const valentineSection = document.querySelector('[data-section="valentine"]');
+const gateCheckbox = document.querySelector('[data-gate-checkbox]');
 const verifyButton = document.querySelector('.verify-button');
 const captchaTiles = document.querySelectorAll('.captcha-tile');
 const captchaError = document.querySelector('[data-captcha-error]');
@@ -155,6 +157,25 @@ const placeDefaultButtons = () => {
     setButtonPosition(yesButton, positionState.yes.x, positionState.yes.y);
     setButtonPosition(noButton, positionState.no.x, positionState.no.y);
 };
+
+
+const showCaptchaStage = () => {
+    gateSection.classList.add('is-hidden');
+    captchaSection.classList.remove('is-hidden');
+};
+
+if (gateSection && captchaSection) {
+    captchaSection.classList.add('is-hidden');
+}
+
+if (gateCheckbox) {
+    gateCheckbox.addEventListener('click', () => {
+        gateCheckbox.classList.add('is-checked');
+        gateCheckbox.setAttribute('aria-pressed', 'true');
+
+        window.setTimeout(showCaptchaStage, 350);
+    }, { once: true });
+}
 
 const updateQuestion = () => {
     questionText.textContent = steps[currentStep] || steps[steps.length - 1];
